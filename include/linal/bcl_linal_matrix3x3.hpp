@@ -733,7 +733,8 @@ namespace bcl
     {
       MatrixInversionGaussJordan< double> mat_1( FRAME_1);
       const Matrix< double> inv_mat_1( mat_1.ComputeInverse());
-      const Matrix3x3< double> rotation_matrix( FRAME_2 * inv_mat_1);
+      const MatrixConstInterface< double> & frame2_base = FRAME_2; // For Clang
+      const Matrix3x3< double> rotation_matrix( frame2_base * inv_mat_1);
       const math::RotationMatrix3D tmp_mat( rotation_matrix);
       const Vector3D ea( tmp_mat.EulerAnglesXYZ());
 
